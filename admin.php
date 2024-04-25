@@ -23,7 +23,7 @@
   <div class="row">
     <a href="users.php" style="color:black;">
 		<div class="col-md-3">
-       <div class="panel panel-box clearfix">
+       <div class=" panel panel-box clearfix">
          <div class="panel-icon pull-left bg-secondary1">
           <i class="glyphicon glyphicon-user"></i>
         </div>

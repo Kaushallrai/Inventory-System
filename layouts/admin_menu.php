@@ -31,13 +31,13 @@
        <li><a href="add_product.php">Add Products</a> </li>
    </ul>
   </li>
-  <li>
+  <!-- <li>
     <a href="media.php" >
       <i class="glyphicon glyphicon-picture"></i>
       <span>Media Files</span>
     </a>
-  </li>
-  <li>
+  </li> -->
+  <!-- <li>
     <a href="#" class="submenu-toggle">
       <i class="glyphicon glyphicon-credit-card"></i>
        <span>Sales</span>
@@ -57,5 +57,5 @@
         <li><a href="monthly_sales.php">Monthly sales</a></li>
         <li><a href="daily_sales.php">Daily sales</a> </li>
       </ul>
-  </li>
+  </li> -->
 </ul>
