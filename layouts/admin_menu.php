@@ -13,10 +13,10 @@
     <ul class="nav submenu">
       <li><a href="group.php">Manage Groups</a> </li>
       <li><a href="users.php">Manage Users</a> </li>
-   </ul>
+    </ul>
   </li>
   <li>
-    <a href="categorie.php" >
+    <a href="categorie.php">
       <i class="glyphicon glyphicon-indent-left"></i>
       <span>Categories</span>
     </a>
@@ -27,16 +27,16 @@
       <span>Products</span>
     </a>
     <ul class="nav submenu">
-       <li><a href="product.php">Manage Products</a> </li>
-       <li><a href="add_product.php">Add Products</a> </li>
-   </ul>
+      <li><a href="product.php">Manage Products</a> </li>
+      <li><a href="add_product.php">Add Products</a> </li>
+    </ul>
   </li>
-  <!-- <li>
-    <a href="media.php" >
+  <li>
+    <a href="media.php">
       <i class="glyphicon glyphicon-picture"></i>
       <span>Media Files</span>
     </a>
-  </li> -->
+  </li>
   <!-- <li>
     <a href="#" class="submenu-toggle">
       <i class="glyphicon glyphicon-credit-card"></i>
