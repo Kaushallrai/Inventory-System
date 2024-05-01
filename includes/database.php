@@ -1,5 +1,6 @@
 <?php
-require_once(LIB_PATH_INC.DS."config.php");
+require_once(__DIR__ . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . "config.php");
+
 
 class MySqli_DB {
 
