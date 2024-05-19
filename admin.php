@@ -45,7 +45,7 @@ $recent_sales = find_recent_sale_added('6')
                     <div class="flex  gap-8 justify-between pt-5 w-5/7">
 
                         <!-- Categories -->
-                        <div
+                        <a href="categorie.php"
                             class="w-40 border rounded-lg p-3 flex flex-col items-center cursor-pointer bg-white h-24 gap-2">
                             <div class="border rounded-md w-10 p-2 mb-2 flex items-center justify-center ">
 
@@ -57,9 +57,9 @@ $recent_sales = find_recent_sale_added('6')
                                 <span>Categories</span>
 
                             </div>
-                        </div>
+                        </a>
                         <!-- Products -->
-                        <div
+                        <a href="manage_products.php"
                             class="w-40 border rounded-lg p-3 flex flex-col items-center cursor-pointer bg-white h-24 gap-2">
                             <div class="border rounded-md w-10 p-2 mb-2 flex items-center justify-center ">
                                 <i class="fas fa-box product-icon text-red-500"></i>
@@ -70,9 +70,9 @@ $recent_sales = find_recent_sale_added('6')
                                 <span>Products</span>
 
                             </div>
-                        </div>
+                        </a>
                         <!-- Sales -->
-                        <div
+                        <a href="sales.php"
                             class="w-40 border rounded-lg p-3 flex flex-col items-center cursor-pointer bg-white h-24 gap-2">
                             <div class="border rounded-md w-10 p-2 mb-2 flex items-center justify-center ">
                                 <i class="
@@ -84,9 +84,9 @@ $recent_sales = find_recent_sale_added('6')
                                 <span>Sales</span>
 
                             </div>
-                        </div>
+                        </a>
                         <!-- Users -->
-                        <div
+                        <a href="manage_users.php"
                             class="w-40 border rounded-lg p-3 flex flex-col items-center cursor-pointer bg-white h-24 gap-2">
                             <div class="border rounded-md w-10 p-2 mb-2 flex items-center justify-center ">
                                 <i class="fas fa-users text-blue-500"></i>
@@ -97,7 +97,7 @@ $recent_sales = find_recent_sale_added('6')
                                 <span>Users</span>
 
                             </div>
-                        </div>
+                        </a>
 
 
 

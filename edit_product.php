@@ -10,7 +10,7 @@ $all_categories = find_all('categories');
 $all_photo = find_all('media');
 if (!$product) {
   $session->msg("d", "Product ID missing.");
-  redirect('product.php');
+  redirect('edit_product.php');
 }
 ?>
 <?php
@@ -36,15 +36,12 @@ if (isset($_POST['product'])) {
     $result = $db->query($query);
     if ($result && $db->affected_rows() === 1) {
       $session->msg('s', "Product updated successfully.");
-      redirect('product.php', false);
+      redirect('manage_products.php', false);
     } else {
       $session->msg('d', 'Failed to update product.');
       redirect('edit_product.php?id=' . $product['id'], false);
     }
 
-  } else {
-    $session->msg("d", $errors);
-    redirect('edit_product.php?id=' . $product['id'], false);
   }
 
 }

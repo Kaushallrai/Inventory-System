@@ -8,6 +8,7 @@ class Media
   public $fileType;
   public $fileTempPath;
   // Set destination for upload
+  public $userPath = SITE_ROOT . DS . '..' . DS . 'uploads/users';
   public $productPath = SITE_ROOT . DS . '..' . DS . 'uploads/products';
 
   public $errors = array();
@@ -97,6 +98,70 @@ class Media
       return false;
     }
   }
+
+  public function process_user($id)
+  {
+
+    if (!empty($this->errors)) {
+      return false;
+    }
+    if (empty($this->fileName) || empty($this->fileTempPath)) {
+      $this->errors[] = "The file location was not available.";
+      return false;
+    }
+    if (!is_writable($this->userPath)) {
+      $this->errors[] = $this->userPath . " Must be writable!!!.";
+      return false;
+    }
+    if (!$id) {
+      $this->errors[] = " Missing user id.";
+      return false;
+    }
+    $ext = explode(".", $this->fileName);
+    $new_name = randString(8) . $id . '.' . end($ext);
+    $this->fileName = $new_name;
+    if ($this->user_image_destroy($id)) {
+      if (move_uploaded_file($this->fileTempPath, $this->userPath . '/' . $this->fileName)) {
+
+        if ($this->update_userImg($id)) {
+          unset($this->fileTempPath);
+          return true;
+        }
+
+      } else {
+        $this->errors[] = "The file upload failed, possibly due to incorrect permissions on the upload folder.";
+        return false;
+      }
+    }
+  }
+
+  // Function for Update user image
+
+  private function update_userImg($id)
+  {
+    global $db;
+    $sql = "UPDATE users SET";
+    $sql .= " image='{$db->escape($this->fileName)}'";
+    $sql .= " WHERE id='{$db->escape($id)}'";
+    $result = $db->query($sql);
+    return ($result && $db->affected_rows() === 1 ? true : false);
+
+  }
+
+  // Function for Delete old image
+
+  public function user_image_destroy($id)
+  {
+    $image = find_by_id('users', $id);
+    if ($image['image'] === 'no_image.png') {
+      return true;
+    } else {
+      unlink($this->userPath . '/' . $image['image']);
+      return true;
+    }
+
+  }
+
 
   private function insert_media()
   {

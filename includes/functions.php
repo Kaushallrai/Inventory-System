@@ -52,7 +52,7 @@ function display_msg($msg = '')
   $output = '';
   if (!empty($msg)) {
     foreach ($msg as $key => $value) {
-      $output .= "<div class=\" flex items-center justify-between p-4 rounded mb-3 border w-2/3 bg-gray-300 text-gray-800\">";
+      $output .= "<div class=\" flex items-center justify-between p-4 rounded mb-3 border w-full bg-gray-300 text-gray-800\">";
       $output .= remove_junk(first_character($value));
       $output .= "<span class=\" ml-2 cursor-pointer text-xl\" onclick=\"this.parentElement.style.display='none'\">&times;</span>";
       $output .= "</div>";
