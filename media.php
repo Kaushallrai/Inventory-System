@@ -9,7 +9,8 @@ page_require_level(2);
 <?php
 if (isset($_POST['submit'])) {
   $photo = new Media();
-  $photo->upload($_FILES['file_upload']);
+  $filename = $_FILES['file_upload']['name']; // Use original filename from the uploaded file
+  $photo->upload($_FILES['file_upload'], $filename);
   if ($photo->process_media()) {
     $session->msg('s', 'Photo has been uploaded successfully.');
     redirect('media.php');
@@ -34,19 +35,17 @@ if (isset($_POST['submit'])) {
 <body class="bg-gray-100" style="height: 100vh; overflow-y: auto;">
 
   <div class="relative">
-    <div class="ml-60 fixed z-50 right-0
-        left-0 top-0
-        
-        "><?php include_once ('layout/header.php'); ?>
+    <div class="ml-60 fixed z-50 right-0 left-0 top-0">
+      <?php include_once ('layout/header.php'); ?>
     </div>
-    <div class="fixed top-0"><?php include_once ('layout/sidebar.php'); ?>
+    <div class="fixed top-0">
+      <?php include_once ('layout/sidebar.php'); ?>
     </div>
-
-
   </div>
-  <div class="  ml-64 mt-20 ">
+
+  <div class="ml-64 mt-20">
     <?php echo display_msg($msg); ?>
-    <div class="w-full ">
+    <div class="w-full">
       <div class="bg-white shadow-md rounded-lg mr-4 border">
         <div class="flex justify-between items-center px-4 py-3 bg-gray-400 rounded-t-lg">
           <div class="flex items-center">
@@ -59,10 +58,10 @@ if (isset($_POST['submit'])) {
             <span class="text-white font-semibold">All Photos</span>
           </div>
           <form class="flex items-center" action="media.php" method="POST" enctype="multipart/form-data">
-            <div class="flex ">
+            <div class="flex">
               <label class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-l cursor-pointer">
                 <input type="file" name="file_upload" multiple="multiple" class="hidden" />
-                <svg xmlns="http://www.w3.org/2000/svg" class=" w-5 " viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd"
                     d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                     clip-rule="evenodd" />
@@ -89,13 +88,13 @@ if (isset($_POST['submit'])) {
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                   <td class="py-3 px-6 text-center"><?php echo count_id(); ?></td>
                   <td class="py-3 px-6 flex items-center justify-center">
-                    <img src="uploads/products/<?php echo $media_file['file_name']; ?>" class="w-20 h-20 rounded " />
+                    <img src="uploads/products/<?php echo $media_file['file_name']; ?>" class="w-20 h-20 rounded" />
                   </td>
                   <td class="py-3 px-6 text-center font-semibold"><?php echo $media_file['file_name']; ?></td>
                   <td class="py-3 px-6 text-center font-semibold"><?php echo $media_file['file_type']; ?></td>
-                  <td class="py-3 px-6 text-center ">
+                  <td class="py-3 px-6 text-center">
                     <a href="delete_media.php?id=<?php echo (int) $media_file['id']; ?>"
-                      class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md ">
+                      class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md">
                       Delete
                     </a>
                   </td>

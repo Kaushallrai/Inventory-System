@@ -7,10 +7,8 @@ class Media
   public $fileName;
   public $fileType;
   public $fileTempPath;
-  //Set destination for upload
-  public $userPath = SITE_ROOT . DS . '..' . DS . 'uploads/users';
+  // Set destination for upload
   public $productPath = SITE_ROOT . DS . '..' . DS . 'uploads/products';
-
 
   public $errors = array();
   public $upload_errors = array(
@@ -29,6 +27,7 @@ class Media
     'jpeg',
     'png',
   );
+
   public function file_ext($filename)
   {
     $ext = strtolower(substr($filename, strrpos($filename, '.') + 1));
@@ -46,39 +45,25 @@ class Media
       $this->errors[] = $this->upload_errors[$file['error']];
       return false;
     elseif (!$this->file_ext($file['name'])):
-      $this->errors[] = 'File not right format ';
+      $this->errors[] = 'File not in the right format';
       return false;
     else:
       $this->imageInfo = getimagesize($file['tmp_name']);
-      $this->fileName = basename($file['name']);
+      $this->fileName = $this->generateUniqueFileName($file['name']);
       $this->fileType = $this->imageInfo['mime'];
       $this->fileTempPath = $file['tmp_name'];
       return true;
     endif;
-
   }
 
-  public function process()
+  private function generateUniqueFileName($fileName)
   {
-
-    if (!empty($this->errors)):
-      return false;
-    elseif (empty($this->fileName) || empty($this->fileTempPath)):
-      $this->errors[] = "The file location was not available.";
-      return false;
-    elseif (!is_writable($this->productPath)):
-      $this->errors[] = $this->productPath . " Must be writable!!!.";
-      return false;
-    elseif (file_exists($this->productPath . "/" . $this->fileName)):
-      $this->errors[] = "The file {$this->fileName} already exists.";
-      return false;
-    else:
-      return true;
-    endif;
+    $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+    $basename = pathinfo($fileName, PATHINFO_FILENAME);
+    $uniqueIdentifier = '_' . time(); // Use only the current timestamp
+    return $basename . $uniqueIdentifier . '.' . $extension;
   }
-  /*--------------------------------------------------------------*/
-  /* Function for Process media file
-  /*--------------------------------------------------------------*/
+
   public function process_media()
   {
     if (!empty($this->errors)) {
@@ -90,7 +75,7 @@ class Media
     }
 
     if (!is_writable($this->productPath)) {
-      $this->errors[] = $this->productPath . " Must be writable!!!.";
+      $this->errors[] = $this->productPath . " must be writable.";
       return false;
     }
 
@@ -111,79 +96,10 @@ class Media
       $this->errors[] = "The file upload failed, possibly due to incorrect permissions on the upload folder.";
       return false;
     }
-
   }
-  /*--------------------------------------------------------------*/
-  /* Function for Process user image
-  /*--------------------------------------------------------------*/
-  public function process_user($id)
-  {
 
-    if (!empty($this->errors)) {
-      return false;
-    }
-    if (empty($this->fileName) || empty($this->fileTempPath)) {
-      $this->errors[] = "The file location was not available.";
-      return false;
-    }
-    if (!is_writable($this->userPath)) {
-      $this->errors[] = $this->userPath . " Must be writable!!!.";
-      return false;
-    }
-    if (!$id) {
-      $this->errors[] = " Missing user id.";
-      return false;
-    }
-    $ext = explode(".", $this->fileName);
-    $new_name = randString(8) . $id . '.' . end($ext);
-    $this->fileName = $new_name;
-    if ($this->user_image_destroy($id)) {
-      if (move_uploaded_file($this->fileTempPath, $this->userPath . '/' . $this->fileName)) {
-
-        if ($this->update_userImg($id)) {
-          unset($this->fileTempPath);
-          return true;
-        }
-
-      } else {
-        $this->errors[] = "The file upload failed, possibly due to incorrect permissions on the upload folder.";
-        return false;
-      }
-    }
-  }
-  /*--------------------------------------------------------------*/
-  /* Function for Update user image
-  /*--------------------------------------------------------------*/
-  private function update_userImg($id)
-  {
-    global $db;
-    $sql = "UPDATE users SET";
-    $sql .= " image='{$db->escape($this->fileName)}'";
-    $sql .= " WHERE id='{$db->escape($id)}'";
-    $result = $db->query($sql);
-    return ($result && $db->affected_rows() === 1 ? true : false);
-
-  }
-  /*--------------------------------------------------------------*/
-  /* Function for Delete old image
-  /*--------------------------------------------------------------*/
-  public function user_image_destroy($id)
-  {
-    $image = find_by_id('users', $id);
-    if ($image['image'] === 'no_image.png') {
-      return true;
-    } else {
-      unlink($this->userPath . '/' . $image['image']);
-      return true;
-    }
-
-  }
-  /*--------------------------------------------------------------*/
-  /* Function for insert media image
-  /*--------------------------------------------------------------*/
   private function insert_media()
   {
-
     global $db;
     $sql = "INSERT INTO media ( file_name,file_type )";
     $sql .= " VALUES ";
@@ -192,11 +108,9 @@ class Media
                   '{$db->escape($this->fileType)}'
                   )";
     return ($db->query($sql) ? true : false);
-
   }
-  /*--------------------------------------------------------------*/
-  /* Function for Delete media by id
-  /*--------------------------------------------------------------*/
+
+
   public function media_destroy($id, $file_name)
   {
     $this->fileName = $file_name;
@@ -212,15 +126,9 @@ class Media
       unlink($this->productPath . '/' . $this->fileName);
       return true;
     } else {
-      $this->error[] = "Photo deletion failed Or Missing Prm.";
+      $this->errors[] = "Photo deletion failed or missing parameter.";
       return false;
     }
-
   }
-
-
-
 }
-
-
 ?>
