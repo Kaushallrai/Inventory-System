@@ -98,6 +98,20 @@ function read_date($str)
     return null;
 }
 /*--------------------------------------------------------------*/
+// Modify the dailySalesForDate() function in your functions.php or wherever it's defined
+function dailySalesForDate($date)
+{
+  global $db;
+  $sql = "SELECT sales.id, sales.product_id, products.name, sales.qty, sales.price, sales.date,
+            (sales.qty * sales.price) AS total_saleing_price
+            FROM sales
+            LEFT JOIN products ON sales.product_id = products.id
+            WHERE DATE(sales.date) = '{$date}'";
+  return find_by_sql($sql);
+}
+
+
+/*--------------------------------------------------------------*/
 /* Function for  Readable Make date time
 /*--------------------------------------------------------------*/
 function make_date()

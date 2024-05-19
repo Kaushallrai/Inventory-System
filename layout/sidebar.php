@@ -1,9 +1,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
@@ -30,7 +28,6 @@
     }
 </style>
 
-
 <div class="flex h-screen">
     <!-- Sidebar -->
     <div id="sidebar" class="w-60 text-white flex flex-col justify-between sidebar-transition border">
@@ -47,7 +44,7 @@
                 <li class="mb-4">
                     <a href="#"
                         class="flex items-center gap-6 px-4 py-3 rounded-md  mx-5 text-center hover:bg-gray-700 submenu-toggle">
-                        <i class="fas fa-users"></i> <!-- Updated icon -->
+                        <i class="fas fa-users"></i>
                         <span>Users</span>
                         <i class="fas fa-caret-down ml-14"></i>
                     </a>
@@ -55,14 +52,14 @@
                         <li class="flex items-center">
                             <a href="manage_groups.php"
                                 class="flex items-center px-4 py-2 text-sm rounded-md text-gray-300 hover:bg-gray-700">
-                                <i class="fas fa-user-friends mr-4"></i> <!-- Updated icon -->
+                                <i class="fas fa-user-friends mr-4"></i>
                                 Manage Groups
                             </a>
                         </li>
                         <li>
                             <a href="manage_users.php"
                                 class="flex items-center px-4 py-2 text-sm rounded-md text-gray-300 hover:bg-gray-700">
-                                <i class="fas fa-user-plus mr-4"></i> <!-- Updated icon -->
+                                <i class="fas fa-user-plus mr-4"></i>
                                 Manage Users
                             </a>
                         </li>
@@ -86,14 +83,14 @@
                         <li class="flex items-center">
                             <a href="manage_products.php"
                                 class="flex items-center px-4 py-2 text-sm rounded-md text-gray-300 hover:bg-gray-700">
-                                <i class="fas fa-cog mr-4"></i> <!-- Updated icon -->
+                                <i class="fas fa-cog mr-4"></i>
                                 Manage product
                             </a>
                         </li>
                         <li>
                             <a href="add_product.php"
                                 class="flex items-center px-4 py-2 text-sm rounded-md text-gray-300 hover:bg-gray-700">
-                                <i class="fas fa-plus-circle mr-4"></i> <!-- Updated icon -->
+                                <i class="fas fa-plus-circle mr-4"></i>
                                 Add product
                             </a>
                         </li>
@@ -105,6 +102,64 @@
                         <i class="fas fa-images"></i>
                         <span>Media</span>
                     </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#"
+                        class="flex items-center gap-6 px-4 py-3 rounded-md mx-5 text-center hover:bg-gray-700 submenu-toggle">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Sales</span>
+                        <i class="fas fa-caret-down ml-8"></i>
+                    </a>
+                    <ul class="nav submenu flex flex-col mx-8" style="display:none;">
+                        <li class="flex items-center">
+                            <a href="sales.php"
+                                class="flex items-center px-4 py-2 text-sm rounded-md text-gray-300 hover:bg-gray-700">
+                                <i class="fas fa-list mr-4"></i>
+                                Manage Sales
+                            </a>
+                        </li>
+                        <li>
+                            <a href="add_sale.php"
+                                class="flex items-center px-4 py-2 text-sm rounded-md text-gray-300 hover:bg-gray-700">
+                                <i class="fas fa-plus-circle mr-4"></i>
+                                Add Sale
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="mb-4">
+                    <a href="#"
+                        class="flex items-center justify-between px-4 py-3 rounded-md mx-5 text-center hover:bg-gray-700 submenu-toggle">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-file-alt"></i>
+                            <span class="ml-4">Sales Report</span>
+                        </div>
+                        <i class="fas fa-caret-down"></i>
+                    </a>
+
+                    <ul class="nav submenu flex flex-col mx-8" style="display:none;">
+                        <li class="flex items-center">
+                            <a href="sales_report.php"
+                                class="flex items-center px-4 py-2 text-sm rounded-md text-gray-300 hover:bg-gray-700">
+                                <i class="fas fa-calendar-alt mr-4"></i>
+                                Sales by Date
+                            </a>
+                        </li>
+                        <li>
+                            <a href="monthly_sales.php"
+                                class="flex items-center px-4 py-2 text-sm rounded-md text-gray-300 hover:bg-gray-700">
+                                <i class="fas fa-calendar-alt mr-4"></i>
+                                Monthly Sales
+                            </a>
+                        </li>
+                        <li>
+                            <a href="daily_sales.php"
+                                class="flex items-center px-4 py-2 text-sm rounded-md text-gray-300 hover:bg-gray-700">
+                                <i class="fas fa-calendar-alt mr-4"></i>
+                                Daily Sales
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -136,3 +191,4 @@
             });
         });
     </script>
+</div>
