@@ -67,7 +67,20 @@ if (isset($_POST['product'])) {
         
         "><?php include_once ('layout/header.php'); ?>
     </div>
-    <div class="fixed top-0"><?php include_once ('layout/sidebar.php'); ?>
+    <div class="fixed top-0"><?php if ($user['user_level'] === '1'): ?>
+        <!-- admin menu -->
+        <?php include_once ('layout/sidebar.php'); ?>
+
+      <?php elseif ($user['user_level'] === '2'): ?>
+        <!-- Special user -->
+        <?php include_once ('layout/sidebar(2).php'); ?>
+
+      <?php elseif ($user['user_level'] === '3'): ?>
+        <!-- User menu -->
+        <?php include_once ('layout/sidebar(3).php'); ?>
+
+      <?php endif; ?>
+
     </div>
 
 
@@ -132,13 +145,14 @@ if (isset($_POST['product'])) {
                         </svg>
                       </span>
                       <input type="number" class="flex-1 bg-transparent outline-none" name="product-quantity"
-                        value="<?php echo remove_junk($product['quantity']); ?>">
+                        value="<?php echo remove_junk($product['quantity']); ?>" min="0">
                     </div>
                   </div>
                 </div>
+
                 <div class="w-1/3 px-2">
                   <div>
-                    <label for="qty" class="block text-gray-700 font-bold mb-2">Buying Price</label>
+                    <label for="buying-price" class="block text-gray-700 font-bold mb-2">Buying Price</label>
                     <div class="flex items-center border rounded-md px-3 py-2">
                       <span class="text-gray-500 mr-2">
                         <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -148,14 +162,15 @@ if (isset($_POST['product'])) {
                         </svg>
                       </span>
                       <input type="number" class="flex-1 bg-transparent outline-none" name="buying-price"
-                        value="<?php echo remove_junk($product['buy_price']); ?>">
+                        value="<?php echo remove_junk($product['buy_price']); ?>" min="0">
                       <span class="text-gray-500 ml-2">.00</span>
                     </div>
                   </div>
                 </div>
+
                 <div class="w-1/3 pl-2">
                   <div>
-                    <label for="qty" class="block text-gray-700 font-bold mb-2">Selling Price</label>
+                    <label for="saleing-price" class="block text-gray-700 font-bold mb-2">Selling Price</label>
                     <div class="flex items-center border rounded-md px-3 py-2">
                       <span class="text-gray-500 mr-2">
                         <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -165,11 +180,12 @@ if (isset($_POST['product'])) {
                         </svg>
                       </span>
                       <input type="number" class="flex-1 bg-transparent outline-none" name="saleing-price"
-                        value="<?php echo remove_junk($product['sale_price']); ?>">
+                        value="<?php echo remove_junk($product['sale_price']); ?>" min="0">
                       <span class="text-gray-500 ml-2">.00</span>
                     </div>
                   </div>
                 </div>
+
               </div>
               <button type="submit" name="product"
                 class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300 w-1/6">

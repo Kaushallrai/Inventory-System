@@ -64,7 +64,20 @@ if (isset($_POST['add_product'])) {
         
         "><?php include_once ('layout/header.php'); ?>
     </div>
-    <div class="fixed top-0"><?php include_once ('layout/sidebar.php'); ?>
+    <div class="fixed top-0"><?php if ($user['user_level'] === '1'): ?>
+        <!-- admin menu -->
+        <?php include_once ('layout/sidebar.php'); ?>
+
+      <?php elseif ($user['user_level'] === '2'): ?>
+        <!-- Special user -->
+        <?php include_once ('layout/sidebar(2).php'); ?>
+
+      <?php elseif ($user['user_level'] === '3'): ?>
+        <!-- User menu -->
+        <?php include_once ('layout/sidebar(3).php'); ?>
+
+      <?php endif; ?>
+
     </div>
 
 
@@ -122,7 +135,7 @@ if (isset($_POST['add_product'])) {
                       </svg>
                     </span>
                     <input type="number" class="flex-1 bg-transparent outline-none" name="product-quantity"
-                      placeholder="Product Quantity">
+                      placeholder="Product Quantity" min="0">
                   </div>
                 </div>
                 <div class="w-1/3 px-2">
@@ -135,7 +148,7 @@ if (isset($_POST['add_product'])) {
                       </svg>
                     </span>
                     <input type="number" class="flex-1 bg-transparent outline-none" name="buying-price"
-                      placeholder="Buying Price">
+                      placeholder="Buying Price" min="0">
                     <span class="text-gray-500 ml-2">.00</span>
                   </div>
                 </div>
@@ -149,7 +162,7 @@ if (isset($_POST['add_product'])) {
                       </svg>
                     </span>
                     <input type="number" class="flex-1 bg-transparent outline-none" name="selling-price"
-                      placeholder="Selling Price">
+                      placeholder="Selling Price" min="0">
                     <span class="text-gray-500 ml-2">.00</span>
                   </div>
                 </div>

@@ -38,8 +38,20 @@ if (isset($_POST['submit'])) {
     <div class="ml-60 fixed z-50 right-0 left-0 top-0">
       <?php include_once ('layout/header.php'); ?>
     </div>
-    <div class="fixed top-0">
-      <?php include_once ('layout/sidebar.php'); ?>
+    <div class="fixed top-0"><?php if ($user['user_level'] === '1'): ?>
+        <!-- admin menu -->
+        <?php include_once ('layout/sidebar.php'); ?>
+
+      <?php elseif ($user['user_level'] === '2'): ?>
+        <!-- Special user -->
+        <?php include_once ('layout/sidebar(2).php'); ?>
+
+      <?php elseif ($user['user_level'] === '3'): ?>
+        <!-- User menu -->
+        <?php include_once ('layout/sidebar(3).php'); ?>
+
+      <?php endif; ?>
+
     </div>
   </div>
 

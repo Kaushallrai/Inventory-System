@@ -1,7 +1,7 @@
 <?php
 require_once ('includes/load.php');
 // Checking the user's permission level for this page
-page_require_level(1);
+page_require_level(2);
 ?>
 <?php
 $categorie = find_by_id('categories', (int) $_GET['id']);

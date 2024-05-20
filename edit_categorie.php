@@ -2,7 +2,7 @@
 $page_title = 'Edit categorie';
 require_once ('includes/load.php');
 // Checkin What level user has permission to view this page
-page_require_level(1);
+page_require_level(2);
 ?>
 <?php
 
@@ -57,7 +57,20 @@ if (isset($_POST['edit_cat'])) {
         
         "><?php include_once ('layout/header.php'); ?>
     </div>
-    <div class="fixed top-0"><?php include_once ('layout/sidebar.php'); ?>
+    <div class="fixed top-0"><?php if ($user['user_level'] === '1'): ?>
+        <!-- admin menu -->
+        <?php include_once ('layout/sidebar.php'); ?>
+
+      <?php elseif ($user['user_level'] === '2'): ?>
+        <!-- Special user -->
+        <?php include_once ('layout/sidebar(2).php'); ?>
+
+      <?php elseif ($user['user_level'] === '3'): ?>
+        <!-- User menu -->
+        <?php include_once ('layout/sidebar(3).php'); ?>
+
+      <?php endif; ?>
+
     </div>
 
 
